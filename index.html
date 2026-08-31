@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fast Photo Color Lab (@fastphotogifts) - Kallakurichi, Tamil Nadu</title>
+  <meta name="description" content="Official Fast Photo Color Lab Store (@fastphotogifts) - Kallakurichi, Tamil Nadu. Photo printing, wholesale frames, synthetic album printing, laser stainless steel & wooden engraving, sublimation gifts. Delivery in 2-3 days all over India!" />
+  
+  <!-- Google Fonts & Material Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- TOP ANNOUNCEMENT BAR -->
+  <div class="top-announcement">
+    <div class="top-announcement-text">
+      <span class="top-announcement-badge">Fast Delivery</span>
+      <span>🔹 Satisfied clients all over India 🥰 | 🖌 Order processed after preview confirmation | 🗓 2-3 Working Days Delivery | Privacy Guaranteed 💯</span>
+    </div>
+    <div class="top-announcement-right">
+      <span id="tracking-btn">📦 Track Order</span>
+      <span>💬 DM @fastphotogifts</span>
+    </div>
+  </div>
+
+  <!-- MAIN HEADER -->
+  <header id="site-header" class="site-header">
+    <div class="header-container">
+      
+      <!-- BRAND LOGO -->
+      <a href="#" class="brand-logo nav-link-item" data-cat="Home">
+        <span class="brand-name">Fast Photo Color Lab</span>
+        <span class="brand-subtitle">@fastphotogifts • Kallakurichi, Tamil Nadu</span>
+      </a>
+
+      <!-- SEARCH BAR WITH AUTOCOMPLETE -->
+      <div class="header-search">
+        <form class="search-form" onsubmit="event.preventDefault();">
+          <input type="text" id="search-input" class="search-input" placeholder="Search deity frames, engraved steel plates, thermos bottles..." autocomplete="off" />
+          <button type="submit" class="search-button">
+            <span class="material-symbols-outlined">search</span>
+          </button>
+        </form>
+        <!-- Search Autocomplete Dropdown -->
+        <div id="search-autocomplete" class="search-autocomplete"></div>
+      </div>
+
+      <!-- HEADER ACTIONS -->
+      <div class="header-actions">
+        <!-- Delivery Location Selector -->
+        <button id="store-selector-btn" class="action-btn store-selector-btn">
+          <span class="material-symbols-outlined" style="color: var(--gc-red);">location_on</span>
+          <div style="text-align: left; line-height: 1.1;">
+            <div style="font-size: 0.7rem; color: var(--gc-text-muted); text-transform: uppercase;">Studio</div>
+            <div id="active-store-name">Kallakurichi Lab</div>
+          </div>
+        </button>
+
+        <!-- Account -->
+        <button id="account-btn" class="action-btn">
+          <span class="material-symbols-outlined">person</span>
+          <span>Account</span>
+        </button>
+
+        <!-- Shopping Cart Drawer Button -->
+        <button id="cart-btn" class="action-btn cart-btn">
+          <span class="material-symbols-outlined">shopping_bag</span>
+          <span>My Bag</span>
+          <span id="cart-badge" class="cart-badge">0</span>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- MAIN CATEGORY NAVIGATION MENU -->
+    <nav class="category-nav">
+      <ul class="nav-container">
+        <li class="nav-item active"><a href="#" class="nav-link-item" data-cat="Home">Home</a></li>
+        <li class="nav-item"><a href="#" class="nav-link-item" data-cat="Sublimation Gifts">Sublimation Gifts</a></li>
+        <li class="nav-item"><a href="#" class="nav-link-item" data-cat="Wooden & Metal Engraving">Wooden & Metal Engraving</a></li>
+        <li class="nav-item"><a href="#" class="nav-link-item" data-cat="Wholesale Frames">Wholesale Frames</a></li>
+        <li class="nav-item"><a href="#" class="nav-link-item" data-cat="Synthetic Album Printing">Synthetic Albums</a></li>
+        <li class="nav-item"><a href="#" class="nav-link-item" data-cat="Sale" style="color: #ff7675;">Deals & Offers</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- HOMEPAGE CONTENT (VISIBLE WHEN ACTIVE ROUTE IS HOME) -->
+  <div id="home-sections">
+    
+    <!-- HOME HERO BANNER -->
+    <section class="home-hero-banner" style="background-image: url('images/fast_photo_gifts_hero_1788178805563.jpg');">
+      <div class="home-hero-overlay"></div>
+      <div class="home-hero-content">
+        <span class="home-hero-tag">Fast Photo Color Lab • @fastphotogifts • Kallakurichi</span>
+        <h1 class="home-hero-title">Customized Photo Printing & Engraving Gifts</h1>
+        <p class="home-hero-sub">Wholesale frames, synthetic wedding albums, engraved stainless steel plates, laser wooden plaques & personalized sublimation gifts. Delivery in 2-3 working days across India!</p>
+        <button class="hero-cta-btn cat-card-click" data-cat="Wooden & Metal Engraving">
+          Explore Engraved Gifts <span class="material-symbols-outlined">arrow_forward</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- TRUST BADGES SECTION -->
+    <section class="trust-badges-section">
+      <div class="trust-badges-container">
+        <div class="trust-badge-card reveal-on-scroll delay-1">
+          <span class="material-symbols-outlined trust-badge-icon">brush</span>
+          <div>
+            <div class="trust-badge-title">Design Preview Approval</div>
+            <div class="trust-badge-desc">Order processed after your preview 🖌</div>
+          </div>
+        </div>
+        <div class="trust-badge-card reveal-on-scroll delay-2">
+          <span class="material-symbols-outlined trust-badge-icon">local_shipping</span>
+          <div>
+            <div class="trust-badge-title">2 to 3 Working Days</div>
+            <div class="trust-badge-desc">Fast delivery all over India 🗓</div>
+          </div>
+        </div>
+        <div class="trust-badge-card reveal-on-scroll delay-3">
+          <span class="material-symbols-outlined trust-badge-icon">verified_user</span>
+          <div>
+            <div class="trust-badge-title">Privacy Guaranteed 💯</div>
+            <div class="trust-badge-desc">100% Quality work & customer trust</div>
+          </div>
+        </div>
+        <div class="trust-badge-card reveal-on-scroll delay-4">
+          <span class="material-symbols-outlined trust-badge-icon">storefront</span>
+          <div>
+            <div class="trust-badge-title">Kallakurichi Color Lab</div>
+            <div class="trust-badge-desc">Tamil Nadu studio & nationwide shipping</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SHOP BY CATEGORY TILES -->
+    <section class="home-categories-section">
+      <div class="section-heading reveal-on-scroll">
+        <h2 class="section-title">Fast Photo Color Lab Services</h2>
+        <p class="section-subtitle">Exquisite personalized photo printing, laser engraving & wholesale frame collections</p>
+      </div>
+
+      <div class="categories-grid">
+        <div class="category-card cat-card-click reveal-on-scroll delay-1" data-cat="Wooden & Metal Engraving">
+          <img src="images/engraved_wood_plaque_1788178833528.jpg" class="category-card-img" alt="Wooden & Metal Engraving" />
+          <div class="category-card-overlay">
+            <h3 class="category-card-title">Wooden & Metal Engraving</h3>
+            <span class="category-card-sub">Stainless Steel Plates & Wooden Plaques →</span>
+          </div>
+        </div>
+
+        <div class="category-card cat-card-click reveal-on-scroll delay-2" data-cat="Sublimation Gifts">
+          <img src="images/sublimation_printed_mug_1788178857934.jpg" class="category-card-img" alt="Sublimation Gifts" />
+          <div class="category-card-overlay">
+            <h3 class="category-card-title">Sublimation Gifts</h3>
+            <span class="category-card-sub">Thermos Bottles, Printed Mugs & Pens →</span>
+          </div>
+        </div>
+
+        <div class="category-card cat-card-click reveal-on-scroll delay-3" data-cat="Wholesale Frames">
+          <img src="images/fast_photo_gifts_hero_1788178805563.jpg" class="category-card-img" alt="Wholesale Frames" />
+          <div class="category-card-overlay">
+            <h3 class="category-card-title">Wholesale Frames</h3>
+            <span class="category-card-sub">Deity Frames & Bulk Batch Orders →</span>
+          </div>
+        </div>
+
+        <div class="category-card cat-card-click reveal-on-scroll delay-4" data-cat="Synthetic Album Printing">
+          <img src="images/fast_photo_gifts_hero_1788178805563.jpg" class="category-card-img" alt="Synthetic Albums" />
+          <div class="category-card-overlay">
+            <h3 class="category-card-title">Synthetic Albums</h3>
+            <span class="category-card-sub">Waterproof Non-Tear Lay-Flat Books →</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TRENDING PRODUCTS SECTION -->
+    <section class="home-trending-section">
+      <div class="section-heading reveal-on-scroll">
+        <h2 class="section-title">Trending Custom Photo Gifts</h2>
+        <p class="section-subtitle">Real items crafted at Fast Photo Color Lab, Kallakurichi</p>
+      </div>
+
+      <div id="home-trending-grid" class="product-grid">
+        <!-- Rendered dynamically -->
+      </div>
+    </section>
+
+  </div>
+
+  <!-- CATEGORY CATALOG PAGE (VISIBLE WHEN ACTIVE ROUTE IS NOT HOME) -->
+  <div id="catalog-section">
+    
+    <!-- CATEGORY HERO HEADER -->
+    <section class="page-hero">
+      <div class="hero-container">
+        <div class="breadcrumbs">
+          <a href="#" class="nav-link-item" data-cat="Home">Home</a> <span>/</span>
+          <strong id="hero-breadcrumb-active" style="color: var(--gc-dark);">Sublimation Gifts</strong>
+        </div>
+
+        <div class="category-title-wrap">
+          <h1 id="hero-title" class="category-title">Sublimation Gifts</h1>
+        </div>
+
+        <div id="hero-desc-text" class="category-description">
+          Custom printed thermos water bottles, magic mugs, laser name pens & personalized gift items.
+        </div>
+      </div>
+    </section>
+
+    <!-- MAIN CATALOG CONTAINER: SIDEBAR + GRID -->
+    <main id="main-wrapper" class="main-wrapper" style="display: none;">
+      
+      <!-- LEFT SIDEBAR FILTERS -->
+      <aside class="sidebar">
+        <div class="filter-header">
+          <span class="filter-title">Filters</span>
+          <button id="clear-filters-btn" class="clear-filters-btn">Clear All</button>
+        </div>
+
+        <!-- Price Filter -->
+        <div class="filter-group">
+          <div class="filter-group-title">Price Range (₹)</div>
+          <div class="price-slider-wrap">
+            <div class="range-slider">
+              <div id="range-progress" class="range-progress" style="left: 0%; width: 100%;"></div>
+              <input type="range" id="range-min" min="0" max="3500" value="0" step="50" />
+              <input type="range" id="range-max" min="0" max="3500" value="3500" step="50" />
+            </div>
+            <div class="price-inputs">
+              <div class="price-input-box">
+                <span>₹</span>
+                <input type="number" id="price-min-input" value="0" min="0" max="3500" />
+              </div>
+              <span style="color: #94a3b8;">to</span>
+              <div class="price-input-box">
+                <span>₹</span>
+                <input type="number" id="price-max-input" value="3500" min="0" max="3500" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Subcategory Filter -->
+        <div class="filter-group">
+          <div class="filter-group-title">Subcategory</div>
+          <ul id="subcategory-list-container" class="filter-list">
+            <!-- Dynamic subcategories rendered by app.js -->
+          </ul>
+        </div>
+      </aside>
+
+      <!-- RIGHT CATALOG CONTENT -->
+      <section class="catalog-content">
+        
+        <!-- TOOLBAR -->
+        <div class="catalog-toolbar">
+          <div id="items-count-text" class="toolbar-info">Showing items</div>
+
+          <div class="toolbar-controls">
+            <label style="font-size: 0.85rem; font-weight: 600;">Sort By:</label>
+            <select id="sort-select" class="sort-select">
+              <option value="position">Featured Position</option>
+              <option value="price-low">Price: Low to High</option>
+              <option value="price-high">Price: High to Low</option>
+              <option value="name-asc">Product Name (A-Z)</option>
+              <option value="bestseller">Popularity / Rating</option>
+            </select>
+
+            <div style="display: flex; gap: 4px;">
+              <button id="grid-view-btn" class="view-mode-btn active" title="Grid View">
+                <span class="material-symbols-outlined" style="font-size: 1.1rem;">grid_view</span>
+              </button>
+              <button id="list-view-btn" class="view-mode-btn" title="List View">
+                <span class="material-symbols-outlined" style="font-size: 1.1rem;">view_list</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- PRODUCT GRID -->
+        <div id="product-grid" class="product-grid">
+          <!-- Products rendered dynamically -->
+        </div>
+
+      </section>
+    </main>
+
+  </div>
+
+  <!-- BACK TO TOP FLOATING BUTTON -->
+  <button id="back-to-top-btn" class="back-to-top-btn" title="Back to Top">
+    <span class="material-symbols-outlined">arrow_upward</span>
+  </button>
+
+  <!-- STORE LOCATION PICKER MODAL -->
+  <div id="store-modal" class="modal-overlay">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 class="modal-title">Select Studio Location</h3>
+        <button id="close-store-modal-btn" class="close-modal-btn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p style="font-size: 0.9rem; color: var(--gc-text-muted); margin-bottom: 15px;">
+          Select your preferred Fast Photo Color Lab studio location:
+        </p>
+        <div id="store-list-container" class="store-list">
+          <!-- Rendered dynamically -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ACCOUNT SIGN IN MODAL -->
+  <div id="account-modal" class="modal-overlay">
+    <div class="modal-box" style="max-width: 480px;">
+      <div class="modal-header">
+        <h3 class="modal-title">Customer Account</h3>
+        <button id="close-account-modal-btn" class="close-modal-btn">&times;</button>
+      </div>
+      <div id="account-modal-body" class="modal-body">
+        <!-- Rendered dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ORDER TRACKING MODAL -->
+  <div id="tracking-modal" class="modal-overlay">
+    <div class="modal-box" style="max-width: 500px;">
+      <div class="modal-header">
+        <h3 class="modal-title">Track Delivery Status</h3>
+        <button id="close-tracking-modal-btn" class="close-modal-btn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p style="font-size: 0.9rem; color: #64748b; margin-bottom: 15px;">
+          Enter your Order ID (e.g. FPG-2026-88192) and WhatsApp Number:
+        </p>
+        <form onsubmit="event.preventDefault(); alert('Order Status: Custom design confirmed. Dispatch scheduled via Express Courier (2-3 days delivery).'); document.getElementById('tracking-modal').classList.remove('active');" style="display: flex; flex-direction: column; gap: 12px;">
+          <input type="text" placeholder="Order ID (e.g. FPG-2026-88192)" required class="checkout-input" value="FPG-2026-88192" />
+          <input type="tel" placeholder="WhatsApp Number" required class="checkout-input" value="+91 98765 43210" />
+          <button type="submit" class="checkout-btn">Track Order Live</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- MULTI-STEP CHECKOUT MODAL -->
+  <div id="checkout-modal" class="modal-overlay">
+    <div class="modal-box" style="max-width: 650px;">
+      <div class="modal-header">
+        <h3 class="modal-title">Checkout - Fast Photo Color Lab</h3>
+        <button id="close-checkout-modal-btn" class="close-modal-btn">&times;</button>
+      </div>
+      <div id="checkout-step-container" class="modal-body">
+        <!-- Rendered dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- PRODUCT QUICK VIEW & PHOTO UPLOAD MODAL -->
+  <div id="quickview-modal" class="modal-overlay">
+    <div class="modal-box quickview-box">
+      <div class="modal-header">
+        <h3 class="modal-title">Customize Photo Gift</h3>
+        <button id="close-quickview-btn" class="close-modal-btn">&times;</button>
+      </div>
+      <div id="quickview-container" class="modal-body">
+        <!-- Rendered dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- SHOPPING CART DRAWER -->
+  <div id="cart-drawer" class="cart-drawer">
+    <div class="cart-header">
+      <h3 style="font-size: 1.1rem; font-weight: 700;">Your Shopping Bag</h3>
+      <button id="close-cart-btn" style="color: #ffffff; font-size: 1.5rem;">&times;</button>
+    </div>
+
+    <!-- Free Shipping Bar -->
+    <div class="free-shipping-bar" style="margin: 15px 20px 0 20px;">
+      <div id="free-shipping-text" style="font-weight: 600; color: var(--gc-dark);">
+        Add ₹999 to qualify for FREE 2-3 Day Delivery in India
+      </div>
+      <div class="progress-track">
+        <div id="free-shipping-fill" class="progress-fill"></div>
+      </div>
+    </div>
+
+    <div id="cart-body" class="cart-body">
+      <!-- Cart items rendered dynamically -->
+    </div>
+
+    <div class="cart-footer">
+      <div class="cart-total-row">
+        <span>Subtotal</span>
+        <span id="cart-subtotal">₹0</span>
+      </div>
+      <button id="checkout-trigger-btn" class="checkout-btn">Proceed to Checkout</button>
+    </div>
+  </div>
+
+  <!-- FLOATING PROMO STICKER -->
+  <div id="promo-sticker" class="floating-promo-sticker">
+    <span class="material-symbols-outlined" style="font-size: 1.2rem;">local_offer</span>
+    <span>GET 10% OFF</span>
+  </div>
+
+  <!-- PROMO SIGNUP MODAL -->
+  <div id="promo-modal" class="modal-overlay">
+    <div class="modal-box" style="max-width: 460px; text-align: center;">
+      <div class="modal-header">
+        <h3 class="modal-title">Fast Photo Color Lab Offer</h3>
+        <button id="close-promo-btn" class="close-modal-btn">&times;</button>
+      </div>
+      <div class="modal-body" style="padding: 30px;">
+        <span class="material-symbols-outlined" style="font-size: 3rem; color: var(--gc-red);">card_giftcard</span>
+        <h2 style="font-size: 1.5rem; font-weight: 700; margin-top: 10px; color: var(--gc-dark);">Get 10% Off Your Order</h2>
+        <p style="font-size: 0.9rem; color: var(--gc-text-muted); margin: 10px 0 20px 0;">
+          Subscribe for custom photo printing discounts, wholesale frame deals & preview notifications!
+        </p>
+        <form onsubmit="event.preventDefault(); alert('Thank you! Your 10% discount code is: FASTPHOTO10'); document.getElementById('promo-modal').classList.remove('active');">
+          <input type="email" placeholder="Enter your email address..." required style="width: 100%; padding: 12px; border: 1px solid var(--gc-border); border-radius: 4px; font-family: inherit; font-size: 0.95rem; margin-bottom: 12px;" />
+          <button type="submit" class="checkout-btn">Get 10% Off Code</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- SEO INFORMATIONAL ARTICLE SECTION -->
+  <section class="seo-section">
+    <div class="seo-container">
+      <div class="seo-block reveal-on-scroll delay-1">
+        <span class="material-symbols-outlined seo-block-icon">storefront</span>
+        <h3>Fast Photo Color Lab - Kallakurichi</h3>
+        <p>Located in Kallakurichi, Tamil Nadu. Specializing in custom photo printing, wholesale synthetic frames, stainless steel plate engraving & custom sublimation gifts.</p>
+      </div>
+      <div class="seo-block reveal-on-scroll delay-2">
+        <span class="material-symbols-outlined seo-block-icon">draw</span>
+        <h3>Preview Confirmation Before Printing 🖌</h3>
+        <p>We process every custom order after sending you a digital design preview on WhatsApp. 100% Quality work and privacy guaranteed.</p>
+      </div>
+      <div class="seo-block reveal-on-scroll delay-3">
+        <span class="material-symbols-outlined seo-block-icon">local_shipping</span>
+        <h3>Delivery in 2 to 3 Working Days 🗓</h3>
+        <p>Fast nationwide courier shipping across all states in India with live tracking and safe protective packaging.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SITE FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-col">
+        <h4>Fast Photo Color Lab</h4>
+        <p style="font-size: 0.85rem; line-height: 1.6; color: #cbd5e1;">
+          <strong>@fastphotogifts</strong> • Kallakurichi, Tamil Nadu, India<br />
+          Photo printing, Wholesale frames, Synthetic album printing, Wooden & Metal engraving, Sublimation gifts. Delivery all over India!
+        </p>
+      </div>
+      
+      <div class="footer-col">
+        <h4>Products & Services</h4>
+        <ul>
+          <li><a href="#" class="nav-link-item" data-cat="Wooden & Metal Engraving">Steel Plate & Wood Engraving</a></li>
+          <li><a href="#" class="nav-link-item" data-cat="Sublimation Gifts">Sublimation Mugs & Bottles</a></li>
+          <li><a href="#" class="nav-link-item" data-cat="Wholesale Frames">Deity & Bulk Photo Frames</a></li>
+          <li><a href="#" class="nav-link-item" data-cat="Synthetic Album Printing">Synthetic Lay-Flat Photobooks</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Customer Support</h4>
+        <ul>
+          <li><a href="#">DM @fastphotogifts on Instagram</a></li>
+          <li><a href="#">Order Process: Preview Confirmation 🖌</a></li>
+          <li><a href="#">Delivery: 2-3 Working Days 🗓</a></li>
+          <li><a href="#">Privacy Guaranteed 💯</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Payment Options (India)</h4>
+        <div style="display: flex; gap: 10px; font-size: 1.8rem; margin-top: 10px;">
+          <span>📱</span> <span>💳</span> <span>🌐</span> <span>📦</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div>&copy; 2026 Fast Photo Color Lab (@fastphotogifts). Kallakurichi, Tamil Nadu.</div>
+      <div>Satisfied clients all over India 🥰</div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/products.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
