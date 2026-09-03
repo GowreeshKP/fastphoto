@@ -360,26 +360,42 @@ button {
   background: var(--gc-dark);
   color: #ffffff;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.category-nav::-webkit-scrollbar {
+  display: none;
 }
 
 .nav-container {
   max-width: 1320px;
   margin: 0 auto;
   display: flex;
+  align-items: center;
   list-style: none;
-  gap: 5px;
+  gap: 8px;
+  padding: 0 20px;
+  white-space: nowrap;
+}
+
+.nav-item {
+  flex-shrink: 0;
 }
 
 .nav-item > a {
   display: block;
   padding: 13px 20px;
-  font-size: 0.95rem;
+  font-size: 0.92rem;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  color: #ffffff;
-  transition: background 0.25s ease, color 0.25s ease;
+  color: #e2e8f0;
+  transition: all 0.25s ease;
   position: relative;
+  white-space: nowrap;
 }
 
 .nav-item > a::after {
@@ -2003,25 +2019,51 @@ button {
     font-size: 0.82rem;
   }
 
-  /* -- Category Nav: horizontal scroll pills -- */
+  /* -- Category Nav: Horizontal Touch-Scroll Pill Tabs -- */
   .category-nav {
+    background: #191718;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     overflow-x: auto;
+    white-space: nowrap;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
+    padding: 6px 0;
   }
   .category-nav::-webkit-scrollbar {
     display: none;
   }
   .nav-container {
-    padding: 0 8px;
-    gap: 0;
+    padding: 4px 12px;
+    gap: 8px;
     flex-wrap: nowrap;
   }
+  .nav-item {
+    flex-shrink: 0;
+  }
   .nav-item > a {
-    padding: 10px 14px;
+    padding: 8px 16px;
     font-size: 0.8rem;
+    font-weight: 600;
     white-space: nowrap;
     letter-spacing: 0.3px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.08);
+    color: #cbd5e1;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .nav-item > a::after {
+    display: none;
+  }
+  .nav-item.active > a {
+    background: var(--gc-red);
+    color: #ffffff;
+    border-color: var(--gc-red);
+    box-shadow: 0 3px 10px rgba(217, 56, 58, 0.4);
+  }
+  .nav-item:hover > a {
+    background: rgba(255, 255, 255, 0.15);
+    color: #ffffff;
   }
 
   /* -- Hero Banner: mobile composition -- */
