@@ -374,9 +374,9 @@ button {
 }
 
 .cat-slide-arrow {
-  background: var(--gc-dark);
+  background: var(--gc-red);
   color: #ffffff;
-  border: 1px solid rgba(255, 255, 255, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.3);
   width: 32px;
   height: 32px;
   border-radius: 50%;
@@ -387,13 +387,12 @@ button {
   flex-shrink: 0;
   transition: all 0.2s ease;
   z-index: 10;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 2px 8px rgba(217, 56, 58, 0.5);
 }
 
 .cat-slide-arrow:hover, .cat-slide-arrow:active {
-  background: var(--gc-red);
-  border-color: var(--gc-red);
-  transform: scale(1.08);
+  background: var(--gc-red-hover);
+  transform: scale(1.1);
 }
 
 .cat-slide-arrow .material-symbols-outlined {
@@ -2079,9 +2078,9 @@ button {
   .cat-slide-arrow {
     width: 30px;
     height: 30px;
-    background: #2a2527;
+    background: var(--gc-red);
     color: #ffffff;
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.4);
     display: flex !important;
   }
   .cat-slide-arrow .material-symbols-outlined {

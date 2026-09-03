@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const CATEGORY_META = {
     'Home': {
       title: "Fast Photo Color Lab",
-      heroImg: "images/fast_photo_gifts_hero_1788178805563.jpg",
+      heroImg: "images/hero_custom_gifts.jpg",
       desc: "Fast Photo Color Lab, Kallakurichi (Tamil Nadu). Photo printing, wholesale frames, synthetic album printing, wooden & stainless steel laser engraving, and sublimation gifts. Delivery in 2-3 working days all over India!"
     },
     'Sublimation Gifts': {
