@@ -263,6 +263,22 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
 
+    // Category Nav Slider Controls
+    const catSlidePrevBtn = document.getElementById('cat-slide-prev-btn');
+    const catSlideNextBtn = document.getElementById('cat-slide-next-btn');
+    const mainNavContainer = document.getElementById('main-nav-container');
+
+    if (catSlidePrevBtn && mainNavContainer) {
+      catSlidePrevBtn.addEventListener('click', () => {
+        mainNavContainer.scrollBy({ left: -180, behavior: 'smooth' });
+      });
+    }
+    if (catSlideNextBtn && mainNavContainer) {
+      catSlideNextBtn.addEventListener('click', () => {
+        mainNavContainer.scrollBy({ left: 180, behavior: 'smooth' });
+      });
+    }
+
     // Category Grid Card Clicks on Home Page
     document.querySelectorAll('.cat-card-click').forEach(card => {
       card.addEventListener('click', () => {

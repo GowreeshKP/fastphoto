@@ -355,7 +355,7 @@ button {
   transform: scale(1.4);
 }
 
-/* MAIN CATEGORY MENU */
+/* MAIN CATEGORY MENU SLIDER */
 .category-nav {
   background: var(--gc-dark);
   color: #ffffff;
@@ -363,12 +363,41 @@ button {
   width: 100%;
 }
 
-.category-nav-wrapper {
+.category-slider-wrap {
   max-width: 1320px;
   margin: 0 auto;
   display: flex;
   align-items: center;
   position: relative;
+  padding: 4px 10px;
+  gap: 6px;
+}
+
+.cat-slide-arrow {
+  background: var(--gc-dark);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+  z-index: 10;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.cat-slide-arrow:hover, .cat-slide-arrow:active {
+  background: var(--gc-red);
+  border-color: var(--gc-red);
+  transform: scale(1.08);
+}
+
+.cat-slide-arrow .material-symbols-outlined {
+  font-size: 1.2rem;
 }
 
 .desktop-text {
@@ -377,19 +406,17 @@ button {
 .mobile-text {
   display: none;
 }
-.mobile-all-cats-btn {
-  display: none;
-}
 
 .nav-container {
   display: flex;
   align-items: center;
   list-style: none;
   gap: 8px;
-  padding: 0 20px;
+  padding: 4px 8px;
   white-space: nowrap;
-  width: 100%;
+  flex: 1;
   overflow-x: auto;
+  scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
 }
@@ -2036,7 +2063,7 @@ button {
     font-size: 0.82rem;
   }
 
-  /* -- Category Nav: Horizontal Touch-Scroll Pill Tabs & All Categories Trigger -- */
+  /* -- Category Nav: Horizontal Touch & Button Slider -- */
   .desktop-text { display: none; }
   .mobile-text { display: inline; }
 
@@ -2045,41 +2072,33 @@ button {
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     position: relative;
   }
-  .category-nav-wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    position: relative;
-    padding: 6px 0;
+  .category-slider-wrap {
+    padding: 6px 4px;
+    gap: 4px;
   }
-  .category-nav-wrapper::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 58px;
-    bottom: 0;
-    width: 25px;
-    background: linear-gradient(90deg, transparent 0%, rgba(25, 23, 24, 0.95) 100%);
-    pointer-events: none;
-    z-index: 4;
+  .cat-slide-arrow {
+    width: 30px;
+    height: 30px;
+    background: #2a2527;
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    display: flex !important;
+  }
+  .cat-slide-arrow .material-symbols-outlined {
+    font-size: 1.2rem;
   }
   .nav-container {
-    padding: 4px 10px 4px 12px;
-    gap: 8px;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    scrollbar-width: none;
-    -webkit-overflow-scrolling: touch;
-  }
-  .nav-container::-webkit-scrollbar {
-    display: none;
+    padding: 2px 4px;
+    gap: 6px;
+    scroll-snap-type: x mandatory;
   }
   .nav-item {
     flex-shrink: 0;
+    scroll-snap-align: start;
   }
   .nav-item > a {
-    padding: 8px 15px;
-    font-size: 0.8rem;
+    padding: 8px 14px;
+    font-size: 0.78rem;
     font-weight: 600;
     white-space: nowrap;
     letter-spacing: 0.3px;
@@ -2101,32 +2120,6 @@ button {
   .nav-item:hover > a {
     background: rgba(255, 255, 255, 0.15);
     color: #ffffff;
-  }
-  .mobile-all-cats-btn {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    background: var(--gc-dark);
-    color: #ffffff;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    padding: 7px 12px;
-    border-radius: 20px;
-    font-size: 0.78rem;
-    font-weight: 700;
-    margin-right: 10px;
-    margin-left: 4px;
-    flex-shrink: 0;
-    box-shadow: -4px 0 10px rgba(0, 0, 0, 0.3);
-    z-index: 5;
-    cursor: pointer;
-    transition: background 0.2s, border-color 0.2s;
-  }
-  .mobile-all-cats-btn:hover, .mobile-all-cats-btn:active {
-    background: var(--gc-red);
-    border-color: var(--gc-red);
-  }
-  .mobile-all-cats-btn .material-symbols-outlined {
-    font-size: 1.1rem;
   }
 
   /* -- Hero Banner: mobile composition -- */
