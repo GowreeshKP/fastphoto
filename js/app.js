@@ -122,6 +122,28 @@ document.addEventListener('DOMContentLoaded', () => {
   const promoModal = document.getElementById('promo-modal');
   const closePromoBtn = document.getElementById('close-promo-btn');
 
+  // Mobile DOM Elements
+  const mobileFilterDrawer = document.getElementById('mobile-filter-drawer');
+  const openMobileFilterBtn = document.getElementById('open-mobile-filter-btn');
+  const closeMobileFilterBtn = document.getElementById('close-mobile-filter-btn');
+  const mobileApplyFiltersBtn = document.getElementById('mobile-apply-filters-btn');
+  const mobileClearFiltersBtn = document.getElementById('mobile-clear-filters-btn');
+  const activeFilterBadge = document.getElementById('active-filter-badge');
+
+  const mobileRangeMin = document.getElementById('mobile-range-min');
+  const mobileRangeMax = document.getElementById('mobile-range-max');
+  const mobilePriceMinInput = document.getElementById('mobile-price-min-input');
+  const mobilePriceMaxInput = document.getElementById('mobile-price-max-input');
+  const mobileRangeProgress = document.getElementById('mobile-range-progress');
+  const mobileSubcategoryListContainer = document.getElementById('mobile-subcategory-list-container');
+  const mobileSortSelect = document.getElementById('mobile-sort-select');
+
+  const mobileCategoriesModal = document.getElementById('mobile-categories-modal');
+  const closeMobileCategoriesBtn = document.getElementById('close-mobile-categories-btn');
+
+  const mobileBottomNav = document.getElementById('mobile-bottom-nav');
+  const mobileNavCartBadge = document.getElementById('mobile-nav-cart-badge');
+
   let scrollObserver = null;
 
   // INITIALIZE APP
@@ -224,10 +246,20 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
 
-    // Sort Select
+    // Sort Select (Sync desktop & mobile)
     if (sortSelect) {
       sortSelect.addEventListener('change', (e) => {
         state.sortOption = e.target.value;
+        if (mobileSortSelect) mobileSortSelect.value = e.target.value;
+        applySort();
+        renderProducts();
+      });
+    }
+
+    if (mobileSortSelect) {
+      mobileSortSelect.addEventListener('change', (e) => {
+        state.sortOption = e.target.value;
+        if (sortSelect) sortSelect.value = e.target.value;
         applySort();
         renderProducts();
       });
@@ -269,11 +301,16 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
 
-    // Price Slider Logic
+    // Price Slider Logic (Desktop & Mobile)
     if (rangeMin && rangeMax) {
       rangeMin.addEventListener('input', handlePriceRange);
       rangeMax.addEventListener('input', handlePriceRange);
     }
+    if (mobileRangeMin && mobileRangeMax) {
+      mobileRangeMin.addEventListener('input', handleMobilePriceRange);
+      mobileRangeMax.addEventListener('input', handleMobilePriceRange);
+    }
+
     if (priceMinInput) {
       priceMinInput.addEventListener('change', (e) => {
         state.priceMin = parseFloat(e.target.value) || 0;
@@ -290,22 +327,82 @@ document.addEventListener('DOMContentLoaded', () => {
         applyFilters();
       });
     }
-
-    // Clear Filters
-    if (clearFiltersBtn) {
-      clearFiltersBtn.addEventListener('click', () => {
-        state.priceMin = 0;
-        state.priceMax = 3500;
-        state.selectedSubcategories = [];
-        state.searchQuery = '';
-        if (searchInput) searchInput.value = '';
-        if (priceMinInput) priceMinInput.value = 0;
-        if (priceMaxInput) priceMaxInput.value = 3500;
-        if (rangeMin) rangeMin.value = 0;
-        if (rangeMax) rangeMax.value = 3500;
-        document.querySelectorAll('.subcategory-cb').forEach(cb => cb.checked = false);
+    if (mobilePriceMinInput) {
+      mobilePriceMinInput.addEventListener('change', (e) => {
+        state.priceMin = parseFloat(e.target.value) || 0;
         updateSliderProgress();
         applyFilters();
+      });
+    }
+    if (mobilePriceMaxInput) {
+      mobilePriceMaxInput.addEventListener('change', (e) => {
+        state.priceMax = parseFloat(e.target.value) || 3500;
+        updateSliderProgress();
+        applyFilters();
+      });
+    }
+
+    // Clear Filters
+    const resetFiltersHandler = () => {
+      state.priceMin = 0;
+      state.priceMax = 3500;
+      state.selectedSubcategories = [];
+      state.searchQuery = '';
+      if (searchInput) searchInput.value = '';
+      if (priceMinInput) priceMinInput.value = 0;
+      if (priceMaxInput) priceMaxInput.value = 3500;
+      if (rangeMin) rangeMin.value = 0;
+      if (rangeMax) rangeMax.value = 3500;
+      document.querySelectorAll('.subcategory-cb').forEach(cb => cb.checked = false);
+      updateSliderProgress();
+      applyFilters();
+    };
+
+    if (clearFiltersBtn) clearFiltersBtn.addEventListener('click', resetFiltersHandler);
+    if (mobileClearFiltersBtn) {
+      mobileClearFiltersBtn.addEventListener('click', () => {
+        resetFiltersHandler();
+        if (mobileFilterDrawer) mobileFilterDrawer.classList.remove('active');
+      });
+    }
+
+    if (mobileApplyFiltersBtn) {
+      mobileApplyFiltersBtn.addEventListener('click', () => {
+        if (mobileFilterDrawer) mobileFilterDrawer.classList.remove('active');
+      });
+    }
+
+    // Mobile Filter Drawer Toggle
+    if (openMobileFilterBtn && closeMobileFilterBtn && mobileFilterDrawer) {
+      openMobileFilterBtn.addEventListener('click', () => mobileFilterDrawer.classList.add('active'));
+      closeMobileFilterBtn.addEventListener('click', () => mobileFilterDrawer.classList.remove('active'));
+    }
+
+    // Mobile Categories Modal Toggle
+    if (closeMobileCategoriesBtn && mobileCategoriesModal) {
+      closeMobileCategoriesBtn.addEventListener('click', () => mobileCategoriesModal.classList.remove('active'));
+    }
+
+    // Mobile Bottom Navigation Bar Actions
+    if (mobileBottomNav) {
+      mobileBottomNav.querySelectorAll('.mobile-nav-item').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const action = btn.getAttribute('data-nav');
+          if (action === 'home') {
+            switchCategory('Home');
+          } else if (action === 'categories') {
+            if (mobileCategoriesModal) mobileCategoriesModal.classList.add('active');
+          } else if (action === 'search') {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            if (searchInput) {
+              setTimeout(() => searchInput.focus(), 300);
+            }
+          } else if (action === 'bag') {
+            if (cartDrawer) cartDrawer.classList.add('active');
+          } else if (action === 'account') {
+            openAccountModal();
+          }
+        });
       });
     }
 
@@ -362,7 +459,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Close Modals on Overlay Click
-    [storeModal, accountModal, checkoutModal, trackingModal, quickviewModal, promoModal].forEach(modal => {
+    [storeModal, accountModal, checkoutModal, trackingModal, quickviewModal, promoModal, mobileFilterDrawer, mobileCategoriesModal].forEach(modal => {
       if (modal) {
         modal.addEventListener('click', (e) => {
           if (e.target === modal) modal.classList.remove('active');
@@ -380,6 +477,18 @@ document.addEventListener('DOMContentLoaded', () => {
     if (heroDescText) heroDescText.textContent = meta.desc;
     if (heroBreadcrumbActive) heroBreadcrumbActive.textContent = meta.title;
 
+    if (mobileCategoriesModal) mobileCategoriesModal.classList.remove('active');
+
+    // Sync mobile bottom nav active state
+    if (mobileBottomNav) {
+      mobileBottomNav.querySelectorAll('.mobile-nav-item').forEach(item => {
+        const nav = item.getAttribute('data-nav');
+        if (nav === 'home' && categoryName === 'Home') item.classList.add('active');
+        else if (nav === 'categories' && categoryName !== 'Home') item.classList.add('active');
+        else item.classList.remove('active');
+      });
+    }
+
     if (categoryName === 'Home') {
       if (homeSections) homeSections.style.display = 'block';
       if (mainWrapper) mainWrapper.style.display = 'none';
@@ -395,10 +504,8 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(observeElements, 100);
   }
 
-  // RENDER SUBCATEGORY CHECKBOXES IN SIDEBAR
+  // RENDER SUBCATEGORY CHECKBOXES IN SIDEBAR & MOBILE DRAWER
   function renderSubcategoryFilters() {
-    if (!subcategoryListContainer) return;
-
     let availableSubcats = [];
     if (state.currentCategory === 'Sale') {
       availableSubcats = Array.from(new Set(state.products.filter(p => p.badgeType === 'sale').map(p => p.category)));
@@ -406,20 +513,26 @@ document.addEventListener('DOMContentLoaded', () => {
       availableSubcats = Array.from(new Set(state.products.filter(p => p.category === state.currentCategory).map(p => p.subcategory)));
     }
 
-    subcategoryListContainer.innerHTML = availableSubcats.map(sub => `
+    const html = availableSubcats.map(sub => `
       <li>
         <label class="filter-checkbox-label">
-          <input type="checkbox" class="subcategory-cb" value="${sub}" />
+          <input type="checkbox" class="subcategory-cb" value="${sub}" ${state.selectedSubcategories.includes(sub) ? 'checked' : ''} />
           <span>${sub}</span>
         </label>
       </li>
     `).join('');
+
+    if (subcategoryListContainer) subcategoryListContainer.innerHTML = html;
+    if (mobileSubcategoryListContainer) mobileSubcategoryListContainer.innerHTML = html;
 
     document.querySelectorAll('.subcategory-cb').forEach(cb => {
       cb.addEventListener('change', () => {
         state.selectedSubcategories = Array.from(document.querySelectorAll('.subcategory-cb'))
           .filter(c => c.checked)
           .map(c => c.value);
+        document.querySelectorAll('.subcategory-cb').forEach(otherCb => {
+          if (otherCb.value === cb.value) otherCb.checked = cb.checked;
+        });
         applyFilters();
       });
     });
@@ -470,7 +583,7 @@ document.addEventListener('DOMContentLoaded', () => {
     observeElements();
   }
 
-  // PRICE SLIDER HANDLER
+  // PRICE SLIDER HANDLERS
   function handlePriceRange() {
     let minVal = parseFloat(rangeMin.value);
     let maxVal = parseFloat(rangeMax.value);
@@ -480,8 +593,20 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     state.priceMin = minVal;
     state.priceMax = maxVal;
-    if (priceMinInput) priceMinInput.value = minVal;
-    if (priceMaxInput) priceMaxInput.value = maxVal;
+    updateSliderProgress();
+    applyFilters();
+  }
+
+  function handleMobilePriceRange() {
+    if (!mobileRangeMin || !mobileRangeMax) return;
+    let minVal = parseFloat(mobileRangeMin.value);
+    let maxVal = parseFloat(mobileRangeMax.value);
+    if (minVal > maxVal - 50) {
+      minVal = maxVal - 50;
+      mobileRangeMin.value = minVal;
+    }
+    state.priceMin = minVal;
+    state.priceMax = maxVal;
     updateSliderProgress();
     applyFilters();
   }
@@ -493,6 +618,18 @@ document.addEventListener('DOMContentLoaded', () => {
       rangeProgress.style.left = `${minPercent}%`;
       rangeProgress.style.width = `${maxPercent - minPercent}%`;
     }
+    if (mobileRangeProgress) {
+      mobileRangeProgress.style.left = `${minPercent}%`;
+      mobileRangeProgress.style.width = `${maxPercent - minPercent}%`;
+    }
+    if (rangeMin) rangeMin.value = state.priceMin;
+    if (rangeMax) rangeMax.value = state.priceMax;
+    if (mobileRangeMin) mobileRangeMin.value = state.priceMin;
+    if (mobileRangeMax) mobileRangeMax.value = state.priceMax;
+    if (priceMinInput) priceMinInput.value = state.priceMin;
+    if (priceMaxInput) priceMaxInput.value = state.priceMax;
+    if (mobilePriceMinInput) mobilePriceMinInput.value = state.priceMin;
+    if (mobilePriceMaxInput) mobilePriceMaxInput.value = state.priceMax;
   }
 
   // FILTERING LOGIC
@@ -527,6 +664,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
       return true;
     });
+
+    let filterCount = 0;
+    if (state.priceMin > 0 || state.priceMax < 3500) filterCount++;
+    if (state.selectedSubcategories.length > 0) filterCount += state.selectedSubcategories.length;
+    if (state.searchQuery) filterCount++;
+
+    if (activeFilterBadge) {
+      if (filterCount > 0) {
+        activeFilterBadge.textContent = filterCount;
+        activeFilterBadge.style.display = 'flex';
+      } else {
+        activeFilterBadge.style.display = 'none';
+      }
+    }
 
     applySort();
     renderProducts();
@@ -704,6 +855,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const subtotal = state.cart.reduce((sum, i) => sum + (i.price * i.qty), 0);
 
     if (cartBadge) cartBadge.textContent = totalItems;
+    if (mobileNavCartBadge) mobileNavCartBadge.textContent = totalItems;
     if (cartSubtotalEl) cartSubtotalEl.textContent = `₹${subtotal.toFixed(0)}`;
 
     const freeShippingThreshold = 999.00;

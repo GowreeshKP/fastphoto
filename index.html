@@ -218,6 +218,24 @@
       </div>
     </section>
 
+    <!-- MOBILE FILTER BAR (VISIBLE ON MOBILE) -->
+    <div id="mobile-filter-bar" class="mobile-filter-bar">
+      <button id="open-mobile-filter-btn" class="mobile-filter-btn">
+        <span class="material-symbols-outlined">tune</span>
+        <span>Filters</span>
+        <span id="active-filter-badge" class="active-filter-badge" style="display: none;">0</span>
+      </button>
+      <div class="mobile-sort-wrap">
+        <select id="mobile-sort-select" class="sort-select">
+          <option value="position">Featured Position</option>
+          <option value="price-low">Price: Low to High</option>
+          <option value="price-high">Price: High to Low</option>
+          <option value="name-asc">Product Name (A-Z)</option>
+          <option value="bestseller">Popularity / Rating</option>
+        </select>
+      </div>
+    </div>
+
     <!-- MAIN CATALOG CONTAINER: SIDEBAR + GRID -->
     <main id="main-wrapper" class="main-wrapper" style="display: none;">
       
@@ -502,6 +520,117 @@
       <div>Satisfied clients all over India 🥰</div>
     </div>
   </footer>
+
+  <!-- MOBILE FILTER DRAWER -->
+  <div id="mobile-filter-drawer" class="modal-overlay">
+    <div class="modal-box mobile-filter-box">
+      <div class="modal-header">
+        <h3 class="modal-title">Filter Products</h3>
+        <button id="close-mobile-filter-btn" class="close-modal-btn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <!-- Price Filter -->
+        <div class="filter-group">
+          <div class="filter-group-title">Price Range (₹)</div>
+          <div class="price-slider-wrap">
+            <div class="range-slider">
+              <div id="mobile-range-progress" class="range-progress" style="left: 0%; width: 100%;"></div>
+              <input type="range" id="mobile-range-min" min="0" max="3500" value="0" step="50" />
+              <input type="range" id="mobile-range-max" min="0" max="3500" value="3500" step="50" />
+            </div>
+            <div class="price-inputs">
+              <div class="price-input-box">
+                <span>₹</span>
+                <input type="number" id="mobile-price-min-input" value="0" min="0" max="3500" />
+              </div>
+              <span style="color: #94a3b8;">to</span>
+              <div class="price-input-box">
+                <span>₹</span>
+                <input type="number" id="mobile-price-max-input" value="3500" min="0" max="3500" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Subcategory Filter -->
+        <div class="filter-group">
+          <div class="filter-group-title">Subcategory</div>
+          <ul id="mobile-subcategory-list-container" class="filter-list">
+            <!-- Dynamic subcategories -->
+          </ul>
+        </div>
+      </div>
+      <div class="mobile-filter-footer">
+        <button id="mobile-clear-filters-btn" class="mobile-filter-action-btn secondary">Clear All</button>
+        <button id="mobile-apply-filters-btn" class="mobile-filter-action-btn primary">Apply Filters</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MOBILE CATEGORIES SELECTOR MODAL -->
+  <div id="mobile-categories-modal" class="modal-overlay">
+    <div class="modal-box" style="max-width: 420px; border-radius: 12px;">
+      <div class="modal-header">
+        <h3 class="modal-title">Explore Categories</h3>
+        <button id="close-mobile-categories-btn" class="close-modal-btn">&times;</button>
+      </div>
+      <div class="modal-body" style="padding: 12px;">
+        <ul class="mobile-category-list">
+          <li class="mobile-cat-item nav-link-item" data-cat="Home">
+            <span class="material-symbols-outlined">home</span>
+            <span>Home Store</span>
+          </li>
+          <li class="mobile-cat-item nav-link-item" data-cat="Sublimation Gifts">
+            <span class="material-symbols-outlined">local_drink</span>
+            <span>Sublimation Gifts</span>
+          </li>
+          <li class="mobile-cat-item nav-link-item" data-cat="Wooden & Metal Engraving">
+            <span class="material-symbols-outlined">history_edu</span>
+            <span>Wooden & Metal Engraving</span>
+          </li>
+          <li class="mobile-cat-item nav-link-item" data-cat="Wholesale Frames">
+            <span class="material-symbols-outlined">filter_frame</span>
+            <span>Wholesale Frames</span>
+          </li>
+          <li class="mobile-cat-item nav-link-item" data-cat="Synthetic Album Printing">
+            <span class="material-symbols-outlined">menu_book</span>
+            <span>Synthetic Albums</span>
+          </li>
+          <li class="mobile-cat-item nav-link-item" data-cat="Sale" style="color: var(--gc-red);">
+            <span class="material-symbols-outlined">local_offer</span>
+            <span>Deals & Offers</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- MOBILE BOTTOM NAVIGATION BAR -->
+  <nav id="mobile-bottom-nav" class="mobile-bottom-nav">
+    <button class="mobile-nav-item active" data-nav="home">
+      <span class="material-symbols-outlined">home</span>
+      <span>Home</span>
+    </button>
+    <button class="mobile-nav-item" data-nav="categories">
+      <span class="material-symbols-outlined">grid_view</span>
+      <span>Categories</span>
+    </button>
+    <button class="mobile-nav-item" data-nav="search">
+      <span class="material-symbols-outlined">search</span>
+      <span>Search</span>
+    </button>
+    <button class="mobile-nav-item" data-nav="bag">
+      <span class="material-symbols-outlined nav-icon-wrap">
+        shopping_bag
+        <span id="mobile-nav-cart-badge" class="mobile-nav-cart-badge">0</span>
+      </span>
+      <span>Bag</span>
+    </button>
+    <button class="mobile-nav-item" data-nav="account">
+      <span class="material-symbols-outlined">person</span>
+      <span>Account</span>
+    </button>
+  </nav>
 
   <!-- Scripts -->
   <script src="js/products.js"></script>
