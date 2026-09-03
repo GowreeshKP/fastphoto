@@ -80,14 +80,20 @@
 
     <!-- MAIN CATEGORY NAVIGATION MENU -->
     <nav class="category-nav">
-      <ul class="nav-container">
-        <li class="nav-item active"><a href="#" class="nav-link-item" data-cat="Home">Home</a></li>
-        <li class="nav-item"><a href="#" class="nav-link-item" data-cat="Sublimation Gifts">Sublimation Gifts</a></li>
-        <li class="nav-item"><a href="#" class="nav-link-item" data-cat="Wooden & Metal Engraving">Wooden & Metal Engraving</a></li>
-        <li class="nav-item"><a href="#" class="nav-link-item" data-cat="Wholesale Frames">Wholesale Frames</a></li>
-        <li class="nav-item"><a href="#" class="nav-link-item" data-cat="Synthetic Album Printing">Synthetic Albums</a></li>
-        <li class="nav-item"><a href="#" class="nav-link-item" data-cat="Sale" style="color: #ff7675;">Deals & Offers</a></li>
-      </ul>
+      <div class="category-nav-wrapper">
+        <ul class="nav-container" id="main-nav-container">
+          <li class="nav-item active"><a href="#" class="nav-link-item" data-cat="Home">Home</a></li>
+          <li class="nav-item"><a href="#" class="nav-link-item" data-cat="Sublimation Gifts"><span class="desktop-text">Sublimation Gifts</span><span class="mobile-text">Sublimation</span></a></li>
+          <li class="nav-item"><a href="#" class="nav-link-item" data-cat="Wooden & Metal Engraving"><span class="desktop-text">Wooden & Metal Engraving</span><span class="mobile-text">Laser Engraving</span></a></li>
+          <li class="nav-item"><a href="#" class="nav-link-item" data-cat="Wholesale Frames"><span class="desktop-text">Wholesale Frames</span><span class="mobile-text">Frames</span></a></li>
+          <li class="nav-item"><a href="#" class="nav-link-item" data-cat="Synthetic Album Printing"><span class="desktop-text">Synthetic Albums</span><span class="mobile-text">Synthetic Albums</span></a></li>
+          <li class="nav-item"><a href="#" class="nav-link-item" data-cat="Sale" style="color: #ff7675;"><span class="desktop-text">Deals & Offers</span><span class="mobile-text">Offers 🔥</span></a></li>
+        </ul>
+        <button id="mobile-all-cats-btn" class="mobile-all-cats-btn" title="View All Categories">
+          <span class="material-symbols-outlined">grid_view</span>
+          <span>All</span>
+        </button>
+      </div>
     </nav>
   </header>
 

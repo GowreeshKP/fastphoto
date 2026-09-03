@@ -140,6 +140,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const mobileCategoriesModal = document.getElementById('mobile-categories-modal');
   const closeMobileCategoriesBtn = document.getElementById('close-mobile-categories-btn');
+  const mobileAllCatsBtn = document.getElementById('mobile-all-cats-btn');
 
   const mobileBottomNav = document.getElementById('mobile-bottom-nav');
   const mobileNavCartBadge = document.getElementById('mobile-nav-cart-badge');
@@ -413,6 +414,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if (closeMobileCategoriesBtn && mobileCategoriesModal) {
       closeMobileCategoriesBtn.addEventListener('click', () => closeOverlay(mobileCategoriesModal));
     }
+    if (mobileAllCatsBtn) {
+      mobileAllCatsBtn.addEventListener('click', () => openOverlay(mobileCategoriesModal));
+    }
 
     // Mobile Bottom Navigation Bar Actions
     if (mobileBottomNav) {
@@ -519,6 +523,12 @@ document.addEventListener('DOMContentLoaded', () => {
     if (heroBreadcrumbActive) heroBreadcrumbActive.textContent = meta.title;
 
     closeOverlay(mobileCategoriesModal);
+
+    // Auto-scroll active category tab into view
+    const activeNavTab = document.querySelector(`.nav-link-item[data-cat="${categoryName}"]`);
+    if (activeNavTab && activeNavTab.parentElement) {
+      activeNavTab.parentElement.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+    }
 
     // Sync mobile bottom nav active state
     if (mobileBottomNav) {
