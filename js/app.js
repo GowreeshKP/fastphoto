@@ -146,6 +146,37 @@ document.addEventListener('DOMContentLoaded', () => {
 
   let scrollObserver = null;
 
+  // BODY SCROLL LOCK UTILITY
+  let scrollLockCount = 0;
+  function lockBodyScroll() {
+    scrollLockCount++;
+    if (scrollLockCount === 1) {
+      document.body.style.overflow = 'hidden';
+      document.body.style.touchAction = 'none';
+    }
+  }
+  function unlockBodyScroll() {
+    scrollLockCount = Math.max(0, scrollLockCount - 1);
+    if (scrollLockCount === 0) {
+      document.body.style.overflow = '';
+      document.body.style.touchAction = '';
+    }
+  }
+
+  // MODAL OPEN/CLOSE WITH SCROLL LOCK
+  function openOverlay(el) {
+    if (el) {
+      el.classList.add('active');
+      lockBodyScroll();
+    }
+  }
+  function closeOverlay(el) {
+    if (el) {
+      el.classList.remove('active');
+      unlockBodyScroll();
+    }
+  }
+
   // INITIALIZE APP
   function init() {
     renderActiveStore();
@@ -362,25 +393,25 @@ document.addEventListener('DOMContentLoaded', () => {
     if (mobileClearFiltersBtn) {
       mobileClearFiltersBtn.addEventListener('click', () => {
         resetFiltersHandler();
-        if (mobileFilterDrawer) mobileFilterDrawer.classList.remove('active');
+        closeOverlay(mobileFilterDrawer);
       });
     }
 
     if (mobileApplyFiltersBtn) {
       mobileApplyFiltersBtn.addEventListener('click', () => {
-        if (mobileFilterDrawer) mobileFilterDrawer.classList.remove('active');
+        closeOverlay(mobileFilterDrawer);
       });
     }
 
     // Mobile Filter Drawer Toggle
     if (openMobileFilterBtn && closeMobileFilterBtn && mobileFilterDrawer) {
-      openMobileFilterBtn.addEventListener('click', () => mobileFilterDrawer.classList.add('active'));
-      closeMobileFilterBtn.addEventListener('click', () => mobileFilterDrawer.classList.remove('active'));
+      openMobileFilterBtn.addEventListener('click', () => openOverlay(mobileFilterDrawer));
+      closeMobileFilterBtn.addEventListener('click', () => closeOverlay(mobileFilterDrawer));
     }
 
     // Mobile Categories Modal Toggle
     if (closeMobileCategoriesBtn && mobileCategoriesModal) {
-      closeMobileCategoriesBtn.addEventListener('click', () => mobileCategoriesModal.classList.remove('active'));
+      closeMobileCategoriesBtn.addEventListener('click', () => closeOverlay(mobileCategoriesModal));
     }
 
     // Mobile Bottom Navigation Bar Actions
@@ -391,14 +422,14 @@ document.addEventListener('DOMContentLoaded', () => {
           if (action === 'home') {
             switchCategory('Home');
           } else if (action === 'categories') {
-            if (mobileCategoriesModal) mobileCategoriesModal.classList.add('active');
+            openOverlay(mobileCategoriesModal);
           } else if (action === 'search') {
             window.scrollTo({ top: 0, behavior: 'smooth' });
             if (searchInput) {
               setTimeout(() => searchInput.focus(), 300);
             }
           } else if (action === 'bag') {
-            if (cartDrawer) cartDrawer.classList.add('active');
+            openOverlay(cartDrawer);
           } else if (action === 'account') {
             openAccountModal();
           }
@@ -408,8 +439,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Cart Drawer Toggle
     if (cartBtn && closeCartBtn) {
-      cartBtn.addEventListener('click', () => cartDrawer.classList.add('active'));
-      closeCartBtn.addEventListener('click', () => cartDrawer.classList.remove('active'));
+      cartBtn.addEventListener('click', () => openOverlay(cartDrawer));
+      closeCartBtn.addEventListener('click', () => closeOverlay(cartDrawer));
     }
 
     // Checkout Modal Trigger
@@ -419,7 +450,7 @@ document.addEventListener('DOMContentLoaded', () => {
           showToast('Your bag is empty! Add items to checkout.');
           return;
         }
-        cartDrawer.classList.remove('active');
+        closeOverlay(cartDrawer);
         openCheckoutModal();
       });
     }
@@ -427,43 +458,53 @@ document.addEventListener('DOMContentLoaded', () => {
     // Account Modal Toggle
     if (accountBtn && closeAccountModalBtn) {
       accountBtn.addEventListener('click', openAccountModal);
-      closeAccountModalBtn.addEventListener('click', () => accountModal.classList.remove('active'));
+      closeAccountModalBtn.addEventListener('click', () => closeOverlay(accountModal));
     }
 
     // Tracking Modal Toggle
     if (trackingBtn && closeTrackingModalBtn) {
-      trackingBtn.addEventListener('click', () => trackingModal.classList.add('active'));
-      closeTrackingModalBtn.addEventListener('click', () => trackingModal.classList.remove('active'));
+      trackingBtn.addEventListener('click', () => openOverlay(trackingModal));
+      closeTrackingModalBtn.addEventListener('click', () => closeOverlay(trackingModal));
     }
 
     // Store Picker Modal Toggle
     if (storeSelectorBtn && closeStoreModalBtn) {
       storeSelectorBtn.addEventListener('click', openStoreModal);
-      closeStoreModalBtn.addEventListener('click', () => storeModal.classList.remove('active'));
+      closeStoreModalBtn.addEventListener('click', () => closeOverlay(storeModal));
     }
 
     // Quickview Modal Close
     if (closeQuickviewBtn) {
-      closeQuickviewBtn.addEventListener('click', () => quickviewModal.classList.remove('active'));
+      closeQuickviewBtn.addEventListener('click', () => closeOverlay(quickviewModal));
     }
 
     // Close Checkout Modal
     if (closeCheckoutModalBtn) {
-      closeCheckoutModalBtn.addEventListener('click', () => checkoutModal.classList.remove('active'));
+      closeCheckoutModalBtn.addEventListener('click', () => closeOverlay(checkoutModal));
     }
 
     // Promo Modal Toggle
     if (promoSticker && closePromoBtn) {
-      promoSticker.addEventListener('click', () => promoModal.classList.add('active'));
-      closePromoBtn.addEventListener('click', () => promoModal.classList.remove('active'));
+      promoSticker.addEventListener('click', () => openOverlay(promoModal));
+      closePromoBtn.addEventListener('click', () => closeOverlay(promoModal));
     }
 
     // Close Modals on Overlay Click
     [storeModal, accountModal, checkoutModal, trackingModal, quickviewModal, promoModal, mobileFilterDrawer, mobileCategoriesModal].forEach(modal => {
       if (modal) {
         modal.addEventListener('click', (e) => {
-          if (e.target === modal) modal.classList.remove('active');
+          if (e.target === modal) closeOverlay(modal);
         });
+      }
+    });
+
+    // ESC key closes active overlays
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        [storeModal, accountModal, checkoutModal, trackingModal, quickviewModal, promoModal, mobileFilterDrawer, mobileCategoriesModal].forEach(m => {
+          if (m && m.classList.contains('active')) closeOverlay(m);
+        });
+        if (cartDrawer && cartDrawer.classList.contains('active')) closeOverlay(cartDrawer);
       }
     });
   }
@@ -477,7 +518,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (heroDescText) heroDescText.textContent = meta.desc;
     if (heroBreadcrumbActive) heroBreadcrumbActive.textContent = meta.title;
 
-    if (mobileCategoriesModal) mobileCategoriesModal.classList.remove('active');
+    closeOverlay(mobileCategoriesModal);
 
     // Sync mobile bottom nav active state
     if (mobileBottomNav) {
@@ -915,7 +956,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!checkoutModal) return;
     state.checkoutStep = 1;
     renderCheckoutStep();
-    checkoutModal.classList.add('active');
+    openOverlay(checkoutModal);
   }
 
   function renderCheckoutStep() {
@@ -934,7 +975,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <input type="email" placeholder="Email Address" required class="checkout-input" value="${state.user ? state.user.email : 'rahul.kumar@example.com'}" />
           <input type="tel" placeholder="Mobile / WhatsApp Number (For Preview Approval)" required class="checkout-input" value="+91 98765 43210" />
           <input type="text" placeholder="Door No / Street / Landmark" required class="checkout-input" value="15 Main Market Road" />
-          <div style="display: flex; gap: 10px;">
+          <div class="checkout-row-flex">
             <input type="text" placeholder="City / Town" required class="checkout-input" value="Kallakurichi" style="flex: 1;" />
             <input type="text" placeholder="Pincode" required class="checkout-input" value="606202" style="width: 120px;" />
           </div>
@@ -966,7 +1007,7 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
           </label>
         </div>
-        <div style="display: flex; gap: 10px;">
+        <div class="checkout-row-flex">
           <button type="button" id="step2-back-btn" class="action-btn">← Back</button>
           <button type="button" id="step2-next-btn" class="checkout-btn" style="flex: 1;">Proceed to Payment →</button>
         </div>
@@ -993,7 +1034,7 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
 
         <form id="checkout-payment-form" style="display: flex; flex-direction: column; gap: 10px;">
-          <div style="display: flex; gap: 10px; margin-bottom: 10px;">
+          <div class="checkout-row-flex" style="margin-bottom: 10px;">
             <label style="flex: 1; border: 1px solid #cbd5e1; padding: 10px; border-radius: 4px; font-size: 0.9rem; font-weight: 600;">
               <input type="radio" name="pay_type" checked /> UPI / GPay / PhonePe
             </label>
@@ -1017,9 +1058,13 @@ document.addEventListener('DOMContentLoaded', () => {
             <p style="font-size: 0.9rem; color: #64748b; margin-top: 10px;">
               Thank you for ordering with Fast Photo Color Lab! We will send a design confirmation preview before printing. Delivery in 2-3 working days!
             </p>
-            <button class="checkout-btn" style="margin-top: 20px;" onclick="document.getElementById('checkout-modal').classList.remove('active');">Return to Store</button>
+            <button class="checkout-btn" style="margin-top: 20px;" id="return-to-store-btn">Return to Store</button>
           </div>
         `;
+        const returnBtn = document.getElementById('return-to-store-btn');
+        if (returnBtn) {
+          returnBtn.addEventListener('click', () => closeOverlay(checkoutModal));
+        }
         state.cart = [];
         saveCart();
         renderCart();
@@ -1072,7 +1117,7 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
 
-    accountModal.classList.add('active');
+    openOverlay(accountModal);
   }
 
   // WISHLIST TOGGLE
@@ -1118,13 +1163,13 @@ document.addEventListener('DOMContentLoaded', () => {
           state.activeStore = selectedStore;
           localStorage.setItem('fpg_store', JSON.stringify(selectedStore));
           renderActiveStore();
-          storeModal.classList.remove('active');
+          closeOverlay(storeModal);
           showToast(`Selected studio: ${selectedStore.name}`);
         }
       });
     });
 
-    storeModal.classList.add('active');
+    openOverlay(storeModal);
   }
 
   // QUICKVIEW MODAL WITH PHOTO UPLOAD & CUSTOM TEXT INPUT
@@ -1178,10 +1223,10 @@ document.addEventListener('DOMContentLoaded', () => {
     quickviewContainer.querySelector('.modal-add-btn').addEventListener('click', () => {
       const customTxt = quickviewContainer.querySelector('#modal-custom-text-input').value.trim();
       addToCart(product.id, 1, customTxt);
-      quickviewModal.classList.remove('active');
+      closeOverlay(quickviewModal);
     });
 
-    quickviewModal.classList.add('active');
+    openOverlay(quickviewModal);
   }
 
   // TOAST NOTIFICATIONS
